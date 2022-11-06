@@ -1,4 +1,4 @@
-package com.io.github.allison.vendas;
+package com.io.github.allison;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
