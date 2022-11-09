@@ -5,6 +5,8 @@ public class Cliente {
     private String nome;
 
     
+    public Cliente() {
+    }
     public Integer getId() {
         return id;
     }

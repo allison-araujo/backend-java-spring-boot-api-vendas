@@ -19,8 +19,8 @@ public class VendasApplication {
 	public CommandLineRunner init(@Autowired Clientes clientes){
 		return args -> {
 			Cliente cliente = new Cliente();
-			cliente.setNome("Allison");
-			cliente.salvar(cliente);
+			cliente.setNome("Allison");			
+			clientes.salvar(cliente);
 
 		};
 	}
