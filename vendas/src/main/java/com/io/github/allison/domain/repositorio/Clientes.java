@@ -10,6 +10,9 @@ import com.io.github.allison.domain.entity.Cliente;
 public class Clientes {
 
     private static String INSERT = "insert into cliente (nome) values (?) ";
+
+
+    
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
