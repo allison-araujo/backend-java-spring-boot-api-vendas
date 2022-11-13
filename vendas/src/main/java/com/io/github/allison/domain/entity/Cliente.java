@@ -4,6 +4,11 @@ public class Cliente {
     private Integer id;
     private String nome;
 
+
+    public Cliente (String nome){
+        this.nome = nome;
+    }
+
     
     public Cliente() {
     }
