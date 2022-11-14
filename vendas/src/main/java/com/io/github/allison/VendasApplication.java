@@ -1,5 +1,7 @@
 package com.io.github.allison;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -18,9 +20,14 @@ public class VendasApplication {
 	@Bean
 	public CommandLineRunner init(@Autowired Clientes clientes){
 		return args -> {
-			Cliente cliente = new Cliente();
-			cliente.setNome("Allison");			
-			clientes.salvar(cliente);
+			clientes.salvar(new Cliente("Alliosn"));
+			clientes.salvar(new Cliente("Outro Araujo"));
+
+			List<Cliente> todosCliente = clientes.obterAll();
+
+			todosCliente.forEach(System.out::println);
+			
+			
 
 		};
 	}
