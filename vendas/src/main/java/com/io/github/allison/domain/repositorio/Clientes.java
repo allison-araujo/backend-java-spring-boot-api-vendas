@@ -6,7 +6,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,8 +14,7 @@ import com.io.github.allison.domain.entity.Cliente;
 @Repository
 public class Clientes {
 
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
+
 
     @Autowired
     private EntityManager entityManager;
@@ -35,6 +33,9 @@ public class Clientes {
 
     @Transactional
     public void deletar(Cliente cliente){
+        if(!entityManager.contains(cliente)){
+            cliente = entityManager.merge(cliente);
+        }
         entityManager.remove(cliente);
     }
 
