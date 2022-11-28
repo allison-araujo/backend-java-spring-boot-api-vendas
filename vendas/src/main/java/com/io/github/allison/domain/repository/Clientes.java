@@ -1,4 +1,4 @@
-package com.io.github.allison.domain.repositorio;
+package com.io.github.allison.domain.repository;
 
 import java.util.List;
 
