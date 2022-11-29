@@ -2,6 +2,8 @@ package com.io.github.allison.domain.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ItemsPedido  extends JpaRepository<ItemsPedido, Integer>{
+import com.io.github.allison.domain.entity.ItemPedido;
+
+public interface ItemsPedido  extends JpaRepository<ItemPedido, Integer>{
     
 }
