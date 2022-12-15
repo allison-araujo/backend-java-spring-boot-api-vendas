@@ -24,11 +24,12 @@ public class ClienteController {
 
     @GetMapping("/api/clientes/{id}")
     @ResponseBody
-    public ResponseEntity<Cliente> getClienteById(@PathVariable Integer id){
+    public ResponseEntity getClienteById(@PathVariable Integer id){
       Optional<Cliente> cliente = clientes.findById(id);
       if(cliente.isPresent()){
         return ResponseEntity.ok(cliente.get());
       }
+      return  ResponseEntity.notFound().build();
 
     }
 
