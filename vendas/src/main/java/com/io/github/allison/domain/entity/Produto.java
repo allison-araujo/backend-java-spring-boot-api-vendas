@@ -47,7 +47,10 @@ public class Produto {
     public void setPreco(BigDecimal preco) {
         this.preco = preco;
     }
-
+    public void save(Produto produto) {
+     
+    }
+  
 
 
     
