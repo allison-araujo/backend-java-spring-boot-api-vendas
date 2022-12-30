@@ -9,26 +9,29 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.io.github.allison.domain.entity.Produto;
+import com.io.github.allison.domain.repository.Produtos;
 
 @RestController
 @RequestMapping("/api/produtos")
 public class ProdutoController {
 
-    private Produto produtos;
+    private Produtos produtos;
 
-    public ProdutoController(Produto produto) {
-        this.produtos = produto;
+    public ProdutoController(Produtos produtos) {
+        this.produtos = produtos;
     }    
     
 
-    @GetMapping("{id")
-    public Produto getProdutoByid(@PathVariable Integer id){
-        return produtos
-                    .findById(id)
-                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, reason: "Produto nao encontrado"))
-    }        
+    @GetMapping("{id}")
+    public Produto getProdutoById(@PathVariable Integer id){
+    return produtos
+                .findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Produto não encontrado" ));
+ 
+}  
     
 
     @PostMapping
@@ -44,7 +47,7 @@ public class ProdutoController {
                         .map(produto -> {
                             produtos.delete(produto);
                             return produto;
-                        })
+                        });
     }
   
    
