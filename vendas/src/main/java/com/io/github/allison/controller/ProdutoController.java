@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -48,6 +49,19 @@ public class ProdutoController {
                             produtos.delete(produto);
                             return produto;
                         });
+    }
+
+    @PutMapping("{id}")    
+    public void update(@PathVariable Integer id, @RequestBody Produto produto){
+            produtos
+                .findById(id)
+                .map(p -> {
+                    produto.setId(p.getId());
+                    produtos.save(produto);
+                    return produto;
+                }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NO_CONTENT, "Produto nao encontraod"));
+
+
     }
   
    
