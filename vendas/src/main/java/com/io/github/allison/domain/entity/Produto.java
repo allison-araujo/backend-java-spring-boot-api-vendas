@@ -29,6 +29,19 @@ public class Produto {
 
 
 
+    
+
+    public Produto(Integer id, String descricao, BigDecimal preco) {
+        this.id = id;
+        this.descricao = descricao;
+        this.preco = preco;
+    }
+
+
+    public Produto() {
+    }
+
+    
     public Integer getId() {
         return id;
     }
@@ -47,9 +60,7 @@ public class Produto {
     public void setPreco(BigDecimal preco) {
         this.preco = preco;
     }
-    public void save(Produto produto) {
-     
-    }
+  
   
 
 
