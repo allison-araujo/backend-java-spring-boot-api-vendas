@@ -41,16 +41,7 @@ public class ProdutoController {
         return produtos.save(produto);
     }
 
-    @DeleteMapping("{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable Integer id){
-        produtos.findById(id)
-                        .map(produto -> {
-                            produtos.delete(produto);
-                            return produto;
-                        });
-    }
-
+  
     @PutMapping("{id}")    
     public void update(@PathVariable Integer id, @RequestBody Produto produto){
             produtos
@@ -64,6 +55,16 @@ public class ProdutoController {
 
     }
   
-   
+    @DeleteMapping("{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable Integer id){
+        produtos
+            .findById(id)
+            .map(p -> {
+                produtos.delete(p);
+                return Void.TYPE;
+            }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NO_CONTENT, "Produto nao encontraod"));
+
+}   
     
 }
