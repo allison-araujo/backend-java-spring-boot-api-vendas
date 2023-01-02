@@ -1,4 +1,4 @@
-package com.io.github.allison.controller;
+package com.io.github.allison.rest.controller;
 
 import java.util.List;
 
