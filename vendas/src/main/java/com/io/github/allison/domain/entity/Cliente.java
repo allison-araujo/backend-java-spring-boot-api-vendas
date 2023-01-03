@@ -22,7 +22,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Entity
 @Table(name = "cliente")
 
 public class Cliente {
