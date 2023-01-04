@@ -1,13 +1,11 @@
 package com.io.github.allison.service.impl;
 
 import java.time.LocalDate;
-import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.io.github.allison.domain.entity.Cliente;
-import com.io.github.allison.domain.entity.ItemPedido;
 import com.io.github.allison.domain.entity.Pedido;
 import com.io.github.allison.domain.repository.Clientes;
 import com.io.github.allison.domain.repository.ItemsPedido;
@@ -45,17 +43,11 @@ public class PedidoServiceImpl implements PedidoService {
         pedido.setDataPedido(LocalDate.now());
         pedido.setCliente(cliente);
 
-        List<ItemPedido> itemsPedido = converterItems(pedido, dto.getItems());
-        repository.save(pedido);
-        itemsPedidoRepository.saveAll(itemsPedido);
-        pedido.setItens(itemsPedido);
-
-        return pedido;
+      return null;
     }
     
 
 
- 
 
 
 
