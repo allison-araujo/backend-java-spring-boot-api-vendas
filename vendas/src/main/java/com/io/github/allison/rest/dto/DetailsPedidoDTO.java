@@ -4,15 +4,23 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PedidoDTO {
-    private Integer cliente;
+@Builder
+
+public class DetailsPedidoDTO {
+    private Integer codigo;
+    private String cpf;
+    private String nomeCliente;
     private BigDecimal total;
-    private List<ItemPedidoDTO> items;
+    private String dataPedido;
+    private List<DetailsItemPedidoDTO> items;
+
+
 
 }
