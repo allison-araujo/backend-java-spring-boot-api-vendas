@@ -12,6 +12,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
+import org.hibernate.validator.constraints.br.CPF;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
@@ -36,7 +38,8 @@ public class Cliente {
     @NotEmpty(message = "Campo nome é obrigatório")
     private String nome;
     
-
+    @NotEmpty(message = "Campo CPF obrigatório")
+    @CPF(message = "Informe um CPF válido.")
     @Column(name = "cpf", length = 11)
     private String cpf;
 
