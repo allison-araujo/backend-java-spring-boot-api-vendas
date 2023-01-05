@@ -12,6 +12,7 @@ import com.io.github.allison.domain.entity.Cliente;
 import com.io.github.allison.domain.entity.ItemPedido;
 import com.io.github.allison.domain.entity.Pedido;
 import com.io.github.allison.domain.entity.Produto;
+import com.io.github.allison.domain.enums.StatusPedido;
 import com.io.github.allison.domain.repository.Clientes;
 import com.io.github.allison.domain.repository.ItemsPedido;
 import com.io.github.allison.domain.repository.Pedidos;
@@ -48,6 +49,7 @@ public class PedidoServiceImpl implements PedidoService {
        pedido.setTotal(dto.getTotal());
        pedido.setDataPedido(LocalDate.now());
        pedido.setCliente(cliente);
+       pedido.setStatus(StatusPedido.REALIZADO);
 
        List<ItemPedido> itemsPedido = converterItems(pedido, dto.getItems());
        repository.save(pedido);
