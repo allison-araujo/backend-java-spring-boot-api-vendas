@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,9 +19,11 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.io.github.allison.domain.entity.ItemPedido;
 import com.io.github.allison.domain.entity.Pedido;
+import com.io.github.allison.domain.enums.StatusPedido;
 import com.io.github.allison.rest.dto.DetailsItemPedidoDTO;
 import com.io.github.allison.rest.dto.DetailsPedidoDTO;
 import com.io.github.allison.rest.dto.PedidoDTO;
+import com.io.github.allison.rest.dto.UpdateStatusPedidoDTO;
 import com.io.github.allison.service.PedidoService;
 
 @RestController
@@ -52,8 +55,17 @@ public class PedidoController {
                 .orElseThrow(() ->
                         new ResponseStatusException(HttpStatus.NOT_FOUND, "Pedido não encontrado."));
     }
+    
+    @PatchMapping("{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void updateStatus(@PathVariable Integer id, @RequestBody UpdateStatusPedidoDTO dto){
+        String newStatus = dto.getNewStatus();
+        service.updateStatus(id, StatusPedido.valueOf(newStatus));
 
 
+
+
+}
 
     private DetailsPedidoDTO converter(Pedido pedido){
        return  DetailsPedidoDTO
