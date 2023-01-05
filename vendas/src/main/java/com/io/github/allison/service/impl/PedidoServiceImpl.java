@@ -17,6 +17,7 @@ import com.io.github.allison.domain.repository.Clientes;
 import com.io.github.allison.domain.repository.ItemsPedido;
 import com.io.github.allison.domain.repository.Pedidos;
 import com.io.github.allison.domain.repository.Produtos;
+import com.io.github.allison.exception.PedidoNotSearchException;
 import com.io.github.allison.exception.RuleBusinessException;
 import com.io.github.allison.rest.dto.ItemPedidoDTO;
 import com.io.github.allison.rest.dto.PedidoDTO;
@@ -32,6 +33,7 @@ public class PedidoServiceImpl implements PedidoService {
     private final Clientes clientesRepository;
     private final Produtos produtosRepository;
     private final ItemsPedido itemsPedidoRepository;
+    
 
 
 
@@ -93,6 +95,20 @@ public class PedidoServiceImpl implements PedidoService {
   public Optional <Pedido> obterDetailsPedido(Integer id) {      
       return repository.findByIdFetchItens(id);
   }
+
+
+
+@Override
+@Transactional
+public void updateStatus(Integer id, StatusPedido statusPedido) {
+    repository
+        .findById(id)
+        .map(pedido -> {
+            pedido.setStatus(statusPedido);
+            return repository.save(pedido);
+        }).orElseThrow(() -> new PedidoNotSearchException() );
+    
+}
 
 
 }
