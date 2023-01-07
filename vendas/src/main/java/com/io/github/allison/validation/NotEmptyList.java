@@ -6,6 +6,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import javax.validation.Constraint;
+import javax.validation.Payload;
 
 import com.io.github.allison.validation.constraintvalidation.NotEmptyListValidator;
 
@@ -20,6 +21,9 @@ import com.io.github.allison.validation.constraintvalidation.NotEmptyListValidat
 public @interface NotEmptyList {
 
     String message() default "A lista nao pode ser vazia.";
+    Class<?>[] groups() default { };
+	Class<? extends Payload>[] payload() default { };
+
     
     
 }
