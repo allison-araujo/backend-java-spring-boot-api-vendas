@@ -1,5 +1,6 @@
 package com.io.github.allison.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -8,9 +9,13 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import com.io.github.allison.service.impl.UserServiceImpl;
+
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
+    @Autowired
+    private UserServiceImpl userService;
 
     @Bean
     public PasswordEncoder passwordEncoder(){
@@ -20,10 +25,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().passwordEncoder(passwordEncoder())
-                    .withUser( "Allison")
-                    .password(passwordEncoder().encode("123"))
-                    .roles("USER","ADMIN");
+        auth
+            .userDetailsService(userService)
+            .passwordEncoder(passwordEncoder());
     
     }
 
