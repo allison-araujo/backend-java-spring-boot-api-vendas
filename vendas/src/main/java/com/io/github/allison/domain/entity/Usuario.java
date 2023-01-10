@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -28,10 +29,10 @@ public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    
+    @NotEmpty(message = "{campo.login.obrigatorio}")
     @Column(name = "login")
     private String login;
-
+    @NotEmpty(message = "{campo.senha.obrigatorio}")
     @Column(name = "senha")
     private String senha;
 
