@@ -6,8 +6,6 @@ import java.time.ZoneId;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.SpringApplication;
-import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Service;
 
 import com.io.github.allison.domain.entity.Usuario;
@@ -58,8 +56,8 @@ public class JwtService {
     public boolean tokenValid(String token){
 
         try{
-                Claims claims = getClaims(token);
-                Date datExpire = claims.getExpiration();
+               Claims claims = getClaims(token);
+               Date datExpire = claims.getExpiration();
                LocalDateTime localDateTime =  datExpire.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
 
 
@@ -71,15 +69,11 @@ public class JwtService {
 
     }
 
-    public static void main(String[] args) {
-        ConfigurableApplicationContext contexto = SpringApplication.run(VendasApplication.class);
-        JwtService service = contexto.getBean(JwtService.class);
-
-        Usuario usuario = Usuario.builder().login("allison").build();
-        String token  = service.generateToken(usuario);
-        System.out.println(token);
+    public String getLoginUser(String token ) throws ExpiredJwtException {
+        return (String) getClaims(token).getSubject();
 
     }
+
 
 
 }
