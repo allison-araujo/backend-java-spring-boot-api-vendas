@@ -15,14 +15,14 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.io.github.allison.service.impl.UserServiceImpl;
 
-public class JwtAuthfilter  extends OncePerRequestFilter{
+public class JwtAuthFilter  extends OncePerRequestFilter{
 
     private JwtService jwtService;
     private UserServiceImpl userService;
 
     
 
-    public JwtAuthfilter(JwtService jwtService, UserServiceImpl userService) {
+    public JwtAuthFilter(JwtService jwtService, UserServiceImpl userService) {
         this.jwtService = jwtService;
         this.userService = userService;
     }
