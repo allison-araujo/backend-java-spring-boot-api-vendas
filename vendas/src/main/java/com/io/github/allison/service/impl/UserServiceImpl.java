@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.io.github.allison.domain.entity.Usuario;
 import com.io.github.allison.domain.repository.UsuarioRepository;
+import com.io.github.allison.exception.PasswordValidException;
 
 
 @Service
@@ -29,11 +30,26 @@ public class UserServiceImpl implements  UserDetailsService{
         return repository.save(usuario);
     }
 
+
+    public UserDetails authentication(Usuario usuario){
+      UserDetails user =  loadUserByUsername(usuario.getLogin());
+     boolean valuePassword =  encoder.matches(usuario.getSenha(), user.getPassword());
+        if(valuePassword){
+            return user;
+        }
+
+        throw new PasswordValidException();
+
+        
+
+    }
+
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         Usuario usuario =  repository.findByLogin(username)
-            .orElseThrow(() -> new UsernameNotFoundException("Usuario nao encontrdo na base de dados"));
+            .orElseThrow(() -> new UsernameNotFoundException("Usuario nao encontrado na base de dados"));
       
         String[] roles = usuario.isAdmin() ? new String[] {"ADMIN","USER"} : new String[]{"USER"};
          
