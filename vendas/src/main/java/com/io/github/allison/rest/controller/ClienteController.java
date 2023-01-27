@@ -22,8 +22,15 @@ import org.springframework.web.server.ResponseStatusException;
 import com.io.github.allison.domain.entity.Cliente;
 import com.io.github.allison.domain.repository.Clientes;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 @RestController
 @RequestMapping("/api/clientes")
+@Api("Api Clientes")
 public class ClienteController {
     
     private Clientes clientes;
@@ -32,10 +39,14 @@ public class ClienteController {
     public ClienteController(Clientes clientes) {
         this.clientes = clientes;
     }
-
-
+ 
     @GetMapping("{id}")    
-    public Cliente getClienteById(@PathVariable Integer id){
+    @ApiOperation("Obter cliente")
+    @ApiResponses({
+        @ApiResponse(code = 200, message = "Cliente encontrado"),
+        @ApiResponse(code = 404, message = "CLiente nao encontrado para esta id")
+    })
+    public Cliente getClienteById(@PathVariable @ApiParam("Id do cliente") Integer id){
     return clientes
               .findById(id)
               .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Cliente não encontrado" ));
@@ -46,6 +57,11 @@ public class ClienteController {
 
     @PostMapping    
     @ResponseStatus(HttpStatus.CREATED)
+    @ApiOperation("Salvar um novo cliente")
+    @ApiResponses({
+        @ApiResponse(code = 201, message = "Cliente salvo"),
+        @ApiResponse(code = 400, message = "Erro de validação")
+    })
     public Cliente save(@RequestBody @Valid Cliente cliente){
      return clientes.save(cliente);
 
